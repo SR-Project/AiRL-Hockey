@@ -1,0 +1,14 @@
+<launch>
+    <param name="robot_description" command="$(find xacro)/xacro '$(find my_robot_arm)/urdf/robot_arm.urdf'" />
+
+    <arg name="gui" default="true" />
+    <arg name="paused" default="false" />
+
+    <node name="gazebo" pkg="gazebo_ros" type="gzserver" respawn="false" output="screen"
+          args="-u -r $(arg paused)" />
+    <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" respawn="false" output="screen" if="$(arg gui)" />
+
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model"
+          args="-param robot_description -urdf -model my_robot_arm" output="screen" />
+</launch>
+

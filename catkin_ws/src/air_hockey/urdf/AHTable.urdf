@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<robot name="AHTable">
+
+    <!-- Main Table (Root Link) -->
+    <link name="box">
+        <visual>
+            <geometry>
+                <mesh filename="package://air_hockey/SR24_02_ExeAHTable.obj" scale="1 1 1"/>
+            </geometry>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+        </visual>
+        <collision>
+            <geometry>
+                <mesh filename="package://air_hockey/SR24_02_ExeAHTable.obj" scale="1 1 1"/>
+            </geometry>
+            <surface>
+                <friction>
+                    <ode>
+                        <mu>0.01</mu>
+                        <mu2>0.01</mu2>
+                    </ode>
+                </friction>
+                <bounce>
+                    <restitution_coefficient>0.9</restitution_coefficient>
+                    <threshold>0.01</threshold>
+                </bounce>
+            </surface>
+        </collision>
+        <inertial>
+            <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
+            <mass value="0.1"/>
+            <inertia ixx="0.00004" ixy="0.0" ixz="0.0" iyy="0.00004" iyz="0.0" izz="0.00004"/>
+        </inertial>
+    </link>
+
+<gazebo>
+    <static>true</static>
+</gazebo>
+
+
+</robot>

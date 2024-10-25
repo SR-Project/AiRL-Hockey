@@ -1,0 +1,12 @@
+controller_list:
+  - name: manipulator_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - jnt1_rev
+      - jnt2_rev
+      - jnt3_rev
+      - jnt4_rev
+      - jnt5_rev
+      - jnt6_rev

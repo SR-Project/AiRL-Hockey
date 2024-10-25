@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<launch>
+  <!-- Gazebo options 
+  <arg name="gazebo_gui" default="true" doc="Start Gazebo GUI"/>
+  <arg name="paused" default="false" doc="Start Gazebo paused"/>
+  <arg name="world_name" default="worlds/empty.world" doc="Gazebo world file"/>
+  <arg name="world_pose" default="-x 0.5 -y 0.5 -z 0 -R 0 -P 0 -Y 0" doc="Pose to spawn the robot at"/>
+  <arg name="initial_joint_positions" default=" -J jnt1_rev 0 -J jnt2_rev 0 -J jnt3_rev 0 -J jnt4_rev 0 -J jnt5_rev 0 -J jnt6_rev 0" doc="Initial joint configuration of the robot"/>-->
+
+  <!-- Start Gazebo paused to allow the controllers to pickup the initial pose -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch" pass_all_args="true">
+    <arg name="paused" value="true"/>
+  </include>
+
+
+  <!-- Load the Robot -->
+  <param name="robot_description" textfile="$(find air_hockey)/urdf/gofa_arm_urdf_toolfixed.urdf"/>
+
+  <arg name="arg_x" default="-1.6" />
+  <arg name="arg_y" default="0.00" />
+  <arg name="arg_z" default="0.8" />
+  <arg name="arg_R" default="0.00" />
+  <arg name="arg_P" default="0.00" />
+  <arg name="arg_Y" default="0.00" />
+
+
+  <!-- Load the Table -->
+  <param name="table_desc" textfile="$(find air_hockey)/urdf/AHTable.urdf"/>
+  
+  <arg name="arg_x_t" default="0.0" />
+  <arg name="arg_y_t" default="0.0" />
+  <arg name="arg_z_t" default="0.0" />
+  <arg name="arg_R_t" default="1.570796 " />
+  <arg name="arg_P_t" default="0.00" />
+  <arg name="arg_Y_t" default="3.141588 " />
+
+  <!-- Load the Puck -->
+  <param name="puck_description" textfile="$(find air_hockey)/urdf/puck.urdf"/>
+
+  <arg name="arg_x_puck" default="0" />
+  <arg name="arg_y_puck" default="0" />
+  <arg name="arg_z_puck" default="0.9" /> <!-- Slightly above table surface -->
+  <arg name="arg_R_puck" default="0.00" />
+  <arg name="arg_P_puck" default="0.00" />
+  <arg name="arg_Y_puck" default="0.00" />
+
+  <!-- Load the Camera -->
+  <param name="cam_description" textfile="$(find air_hockey)/urdf/camera.urdf"/>
+
+  <arg name="arg_x_cam" default="0" />
+  <arg name="arg_y_cam" default="0" />
+  <arg name="arg_z_cam" default="1.395" />
+  <arg name="arg_R_cam" default="2e-06" />
+  <arg name="arg_P_cam" default="1.54679" />
+  <arg name="arg_Y_cam" default="1.57079" />
+
+
+  <!-- Spawn the Robot -->
+  <node name="spawn_urdf_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
+    args="-x $(arg arg_x) -y $(arg arg_y) -z $(arg arg_z) -Y $(arg arg_Y) -R $(arg arg_R) -P $(arg arg_P) -param robot_description -urdf -model gofa_arm_urdf_toolfixed -J jnt1_rev 0.0
+    -J jnt2_rev 0.0 -J jnt3_rev 0.0 -J jnt4_rev 0.0 -J jnt5_rev 0.0 -J jnt6_rev 0.0"
+  />
+
+  <!-- Spawn the Table -->
+  <node name="spawn_urdf_table" pkg="gazebo_ros" type="spawn_model" output="screen"
+    args="-x $(arg arg_x_t) -y $(arg arg_y_t) -z $(arg arg_z_t) -Y $(arg arg_Y_t) -R $(arg arg_R_t) -P $(arg arg_P_t) -param table_desc -urdf -model AHTables"
+  />
+
+  <!-- Spawn the Puck -->
+  <node name="spawn_urdf_puck" pkg="gazebo_ros" type="spawn_model" output="screen"
+    args="-param puck_description -urdf -model hockey_puck -x $(arg arg_x_puck) -y $(arg arg_y_puck) -z $(arg arg_z_puck) -Y $(arg arg_Y_puck) -R $(arg arg_R_puck) -P $(arg arg_P_puck)"
+  />
+
+  <!-- Spawn the Camera -->
+  <node name="spawn_urdf_camera" pkg="gazebo_ros" type="spawn_model" output="screen"
+    args="-param cam_description -urdf -model camera -x $(arg arg_x_cam) -y $(arg arg_y_cam) -z $(arg arg_z_cam) -Y $(arg arg_Y_cam) -R $(arg arg_R_cam) -P $(arg arg_P_cam)"
+  />
+
+  <!-- Transformations -->
+  <node pkg="air_hockey" type="fixed_tf_broadcaster.py" name="fixed_tf_broadcaster" output="screen" />
+
+
+
+  <!-- Load the controller parameters onto the parameter server -->
+  <rosparam file="$(find air_hockey_moveit)/config/gazebo_controllers.yaml" />
+  <include file="$(find air_hockey_moveit)/launch/ros_controllers.launch"/>
+
+  <!-- Spawn the Gazebo ROS controllers -->
+  <node name="gazebo_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller" />
+
+  <!-- Given the published joint states, publish tf for the robot links -->
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
+  
+  <include file="$(find air_hockey_moveit)/launch/move_group.launch" >
+     <arg name="publish_monitored_planning_scene" value="true" />
+  </include>
+
+  <!-- Show in Rviz -->   
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find air_hockey_moveit)/launch/moveit.rviz" />
+  
+  
+</launch>

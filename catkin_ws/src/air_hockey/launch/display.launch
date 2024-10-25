@@ -1,0 +1,14 @@
+<launch>
+    <!-- Spawn Gazebo with the robot -->
+    <param name="robot_description" command="$(find xacro)/xacro $(find air_hockey)/urdf/gofa_arm_urdf_toolfixed.urdf"/>
+    
+    <arg name="gui" default="true" />
+    <arg name="paused" default="false" />
+    
+    <node name="gazebo" pkg="gazebo_ros" type="gzserver" args="-s libgazebo_ros_factory.so" output="screen" respawn="false"/>
+    <node name="gazebo_gui" pkg="gazebo_ros" type="gzclient" output="screen" respawn="false" if="$(arg gui)"/>
+    
+    <node name="spawn_urdf" pkg="gazebo_ros" type="spawn_model" args="-param robot_description -urdf -model gofa_arm_urdf_toolfixed" output="screen"/>
+   
+    
+</launch>

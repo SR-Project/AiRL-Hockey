@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: air_hockey
+    relative_path: urdf/gofa_arm_urdf_toolfixed.urdf
+    xacro_args: ""
+  SRDF:
+    relative_path: config/gofa_arm_urdf_toolfixed.srdf
+  CONFIG:
+    author_name: robot
+    author_email: robot@robot.com
+    generated_timestamp: 1729849494
