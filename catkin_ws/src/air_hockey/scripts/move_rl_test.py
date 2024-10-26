@@ -4,6 +4,7 @@ import rospy
 import geometry_msgs.msg
 from moveit_commander import MoveGroupCommander
 import numpy as np
+from std_msgs.msg import Float32MultiArray
 
 # Force factor based on your RL agent's scale
 FORCE_FACTOR = 0.1  # Adjust this to scale how far the robot moves based on the RL action
@@ -27,11 +28,6 @@ def clamp(value, min_value, max_value):
     return max(min(value, max_value), min_value)
 
 def move_to_world_coords(relative_movement):
-    rospy.init_node('move_to_world_coords')
-
-    # Initialize MoveIt commander
-    robot_arm = MoveGroupCommander('manipulator')
-
     # Get the current pose of the robot (including orientation)
     current_pose = robot_arm.get_current_pose().pose
 
@@ -53,12 +49,37 @@ def move_to_world_coords(relative_movement):
     # Clear target after moving
     robot_arm.clear_pose_targets()
 
-if __name__ == "__main__":
+def callback(data):
+    # Extract the couple of values from the message
+    values = data.data
+    if len(values) == 2:
+        x, y = values
+        rospy.loginfo("Received values: x=%f, y=%f", x, y)
+    else:
+        rospy.logwarn("Received an unexpected number of values: %s", values)
+        
     # Example RL model action in [-1, 1] for x and y forces
-    rl_action = np.array([0, 1])  # Replace with actual RL model output
+    rl_action = np.array(values)  # Replace with actual RL model output
 
     # Convert RL action to movement in the world
     relative_movement = rl_action * FORCE_FACTOR  # Scale the action to control movement
 
     move_to_world_coords(relative_movement)
+
+if __name__ == "__main__":
+    rospy.init_node('move_to_world_coords')
+
+    # Initialize MoveIt commander
+    robot_arm = MoveGroupCommander('manipulator')
+    
+    # Move to start position
+    robot_arm.set_named_target("Start")
+    plan = robot_arm.go(wait=True)
+    
+    rospy.Subscriber('/robot_movement', Float32MultiArray, callback)
+    
+    rospy.loginfo("Subscribed to /robot_movement topic.")
+    
+    # Keep Python from exiting until this node is stopped
+    rospy.spin()
 
