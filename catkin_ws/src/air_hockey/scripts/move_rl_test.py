@@ -73,8 +73,8 @@ if __name__ == "__main__":
     robot_arm = MoveGroupCommander('manipulator')
     
     # Move to start position
-    robot_arm.set_named_target("Start")
-    plan = robot_arm.go(wait=True)
+    # robot_arm.set_named_target("Start")
+    # plan = robot_arm.go(wait=True)
     
     rospy.Subscriber('/robot_movement', Float32MultiArray, callback)
     

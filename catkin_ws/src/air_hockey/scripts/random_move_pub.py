@@ -1,32 +1,33 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 
 import rospy
-import random
+import math
 from std_msgs.msg import Float32MultiArray
 
-def generate_random_pair(last_pair, step_size=0.1):
-    # Generate a new pair with values close to the previous pair
-    new_x = max(-1, min(1, last_pair[0] + random.uniform(-step_size, step_size)))
-    new_y = max(-1, min(1, last_pair[1] + random.uniform(-step_size, step_size)))
-    return [new_x, new_y]
+def generate_circle_pair(angle, radius=0.2):
+    # Generate the x and y values for circular motion
+    x = radius * math.cos(angle)
+    y = radius * math.sin(angle)
+    return [x, y]
 
 def main():
     # Initialize the ROS node
-    rospy.init_node('random_movement_publisher', anonymous=True)
+    rospy.init_node('circular_movement_publisher', anonymous=True)
     
     # Create a publisher on the /robot_movement topic with Float32MultiArray messages
     pub = rospy.Publisher('/robot_movement', Float32MultiArray, queue_size=10)
-    rate = rospy.Rate(1)  # Frequency of 1 Hz (1 message per second)
+    rate = rospy.Rate(10)  # Frequency of 10 Hz (10 messages per second)
     
-    # Initial pair of values
-    last_pair = [random.uniform(-1, 1), random.uniform(-1, 1)]
-
-    rospy.loginfo("Starting to publish random movement data...")
+    # Initial angle in radians
+    angle = 0.0
+    step_size = 0.1  # Step size for angle increments
+    
+    rospy.loginfo("Starting to publish circular movement data...")
 
     # Main loop
     while not rospy.is_shutdown():
-        # Generate a new pair with values close to the previous pair
-        new_pair = generate_random_pair(last_pair)
+        # Generate a new pair of values representing circular motion
+        new_pair = generate_circle_pair(angle)
         
         # Prepare the message
         msg = Float32MultiArray(data=new_pair)
@@ -37,10 +38,12 @@ def main():
         # Log the values for debugging
         rospy.loginfo("Published values: %s", new_pair)
         
-        # Update last_pair for the next iteration
-        last_pair = new_pair
+        # Increment the angle for the next iteration (mod 2*pi to keep it in range)
+        angle += step_size
+        if angle > 2 * math.pi:
+            angle -= 2 * math.pi
         
-        # Sleep for 1 second (1 Hz)
+        # Sleep for 1/10th of a second (10 Hz)
         rate.sleep()
 
 if __name__ == '__main__':
@@ -48,4 +51,3 @@ if __name__ == '__main__':
         main()
     except rospy.ROSInterruptException:
         rospy.loginfo("ROS node interrupted.")
-
