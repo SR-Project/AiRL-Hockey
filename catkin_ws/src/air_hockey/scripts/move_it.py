@@ -55,7 +55,7 @@ def move_to_world_coords(world_coords):
 if __name__ == "__main__":
     # Example world coordinates (x, y, z)
     world_x = -0.8  # LIMIT 0.6 with z=1.2 and y=0.0
-    world_y = -0.2
+    world_y = 0.3
     world_z = 0.8
 
     base_x = -1.6
