@@ -11,6 +11,18 @@ def move_to_world_coords(world_coords):
 
     print(world_coords)
 
+    # Initialize MoveIt commander
+    robot_arm = MoveGroupCommander('manipulator')  # Adjust the group name according to your robot
+
+    robot_arm.set_named_target("Start")
+    robot_arm.go(wait=True)
+
+    # Get the current pose of the robot (which includes orientation)
+    current_pose = robot_arm.get_current_pose().pose
+
+    # Extract the current orientation (quaternion) from the robot's pose
+    current_orientation = current_pose.orientation
+
     # Wait for the transform between 'world' and 'base_link'
     tf_buffer = tf2_ros.Buffer()
     listener = tf2_ros.TransformListener(tf_buffer)
@@ -44,6 +56,12 @@ def move_to_world_coords(world_coords):
     target_pose.position.y = point_base_link.point.y
     target_pose.position.z = point_base_link.point.z
 
+    # Maintain the robot's current orientation
+    target_pose.orientation.x = current_orientation.x
+    target_pose.orientation.y = current_orientation.y
+    target_pose.orientation.z = current_orientation.z
+    target_pose.orientation.w = current_orientation.w
+
     print(target_pose.position.x, target_pose.position.y, target_pose.position.z)
 
     # Move robot to the target
@@ -54,6 +72,8 @@ def move_to_world_coords(world_coords):
     robot_arm.clear_pose_targets()
 
 if __name__ == "__main__":
+
+
     # Example world coordinates (x, y, z)
-    world_coordinates = [-0.8, 0.3 ,1.2]
+    world_coordinates = [-1, 0.3 ,0.8]
     move_to_world_coords(world_coordinates)

@@ -7,6 +7,8 @@
   <arg name="world_pose" default="-x 0.5 -y 0.5 -z 0 -R 0 -P 0 -Y 0" doc="Pose to spawn the robot at"/>
   <arg name="initial_joint_positions" default=" -J jnt1_rev 0 -J jnt2_rev 0 -J jnt3_rev 0 -J jnt4_rev 0 -J jnt5_rev 0 -J jnt6_rev 0" doc="Initial joint configuration of the robot"/>-->
 
+  <arg name="paused" default="false" doc="Start Gazebo paused"/>
+
   <!-- Start Gazebo paused to allow the controllers to pickup the initial pose -->
   <include file="$(find gazebo_ros)/launch/empty_world.launch" pass_all_args="true">
     <arg name="paused" value="true"/>
@@ -16,7 +18,7 @@
   <!-- Load the Robot -->
   <param name="robot_description" textfile="$(find air_hockey)/urdf/gofa_arm_urdf_toolfixed.urdf"/>
 
-  <arg name="arg_x" default="-1.6" />
+  <arg name="arg_x" default="-1.25" />
   <arg name="arg_y" default="0.00" />
   <arg name="arg_z" default="0.8" />
   <arg name="arg_R" default="0.00" />
@@ -37,8 +39,8 @@
   <!-- Load the Puck -->
   <param name="puck_description" textfile="$(find air_hockey)/urdf/puck.urdf"/>
 
-  <arg name="arg_x_puck" default="0" />
-  <arg name="arg_y_puck" default="0" />
+  <arg name="arg_x_puck" default="-0.3" />
+  <arg name="arg_y_puck" default="0.2" />
   <arg name="arg_z_puck" default="0.9" /> <!-- Slightly above table surface -->
   <arg name="arg_R_puck" default="0.00" />
   <arg name="arg_P_puck" default="0.00" />
@@ -78,6 +80,12 @@
 
   <!-- Transformations -->
   <node pkg="air_hockey" type="fixed_tf_broadcaster.py" name="fixed_tf_broadcaster" output="screen" />
+
+
+  <!-- Scripts -->
+  <node pkg="air_hockey" type="publish_end_effector.py" name="end_effector_position" output="screen" />
+  <node pkg="air_hockey" type="detect_puck.py" name="puck_position" output="screen" />
+  <node pkg="air_hockey" type="pub_rl.py" name="rl_info" output="screen" />
 
 
 

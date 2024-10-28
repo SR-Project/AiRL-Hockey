@@ -13,23 +13,13 @@ def move_to_world_coords(world_coords):
     robot_arm = MoveGroupCommander('manipulator')  # Adjust the group name according to your robot
 
     robot_arm.set_named_target("Start")
-    plan = robot_arm.go(wait=True)
-
-    print(plan)
-
+    robot_arm.go(wait=True)
 
     # Get the current pose of the robot (which includes orientation)
     current_pose = robot_arm.get_current_pose().pose
 
     # Extract the current orientation (quaternion) from the robot's pose
     current_orientation = current_pose.orientation
-
-    # ORIENTAZIONE
-    # x: -4.9490688906547824e-05
-    # y: 0.9998512452122492
-    # z: 3.430086424814244e-05
-    # w: 0.017247719316980086
-
 
     # Set target position in base_link coordinates while keeping the current orientation
     target_pose = geometry_msgs.msg.Pose()
@@ -43,8 +33,6 @@ def move_to_world_coords(world_coords):
     target_pose.orientation.z = current_orientation.z
     target_pose.orientation.w = current_orientation.w
 
-
-
     # Move robot to the target position with the current orientation
     robot_arm.set_pose_target(target_pose)
     robot_arm.go(wait=True)
@@ -52,13 +40,17 @@ def move_to_world_coords(world_coords):
     # Clear the target pose after moving
     robot_arm.clear_pose_targets()
 
+    # Get and print the current joint values after reaching the target position
+    joint_values = robot_arm.get_current_joint_values()
+    print("Current joint values:", joint_values)
+    
 if __name__ == "__main__":
     # Example world coordinates (x, y, z)
-    world_x = -0.8  # LIMIT 0.6 with z=1.2 and y=0.0
+    world_x = -0.5  # LIMIT 0.6 with z=1.2 and y=0.0
     world_y = 0
-    world_z = 0.8
+    world_z = 0.775
 
-    base_x = -1.6
+    base_x = -1.2
     base_y = 0.0
     base_z = 0.8
 

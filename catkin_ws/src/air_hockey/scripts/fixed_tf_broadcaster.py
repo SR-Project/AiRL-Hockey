@@ -23,7 +23,7 @@ class FixedTFBroadcaster:
             t1.child_frame_id = "base_link"
 
             # Define translation for the first TF
-            t1.transform.translation.x = -1.6
+            t1.transform.translation.x = -1.25
             t1.transform.translation.y = 0.0
             t1.transform.translation.z = 0.8
 

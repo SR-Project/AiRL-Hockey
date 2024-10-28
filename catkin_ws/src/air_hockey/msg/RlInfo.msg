@@ -1,0 +1,5 @@
+# Combined information for reinforcement learning
+geometry_msgs/Point puck_position
+geometry_msgs/Vector3 puck_velocity
+geometry_msgs/Point robot_position
+geometry_msgs/Vector3 robot_velocity

@@ -1,5 +1,5 @@
 manipulator_controller:
-  type: position_controllers/JointTrajectoryController
+  type: velocity_controllers/JointTrajectoryController
   joints:
     - jnt1_rev
     - jnt2_rev

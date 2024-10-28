@@ -51,7 +51,7 @@ class PuckDetector(object):
             #print(puck_3d)
 
             world_coord = self.transform_point(puck_3d)
-            print(f"Coords (x,y,z): {world_coord}")
+            #print(f"Coords (x,y,z): {world_coord}")
             #print("Real coords: (0.000026, -0.000011, 0.774995)")
 
             self.last_valid_position = world_coord
@@ -72,7 +72,7 @@ class PuckDetector(object):
 
             if len(self.position_history) > 1:
                 velocity = self.compute_velocity_weighted()
-                print(f"Velocity (x,y): {velocity}")
+                #print(f"Velocity (x,y): {velocity}")
             else:
                 velocity = (0,0)
 

@@ -22,12 +22,12 @@
         <joint name="jnt6_rev" value="0"/>
     </group_state>
     <group_state name="Start" group="manipulator">
-        <joint name="jnt1_rev" value="0"/>
-        <joint name="jnt2_rev" value="0.3605"/>
-        <joint name="jnt3_rev" value="-0.3948"/>
-        <joint name="jnt4_rev" value="0"/>
-        <joint name="jnt5_rev" value="1.5707"/>
-        <joint name="jnt6_rev" value="0"/>
+        <joint name="jnt1_rev" value="0.00256572"/>
+        <joint name="jnt2_rev" value="0.1609"/>
+        <joint name="jnt3_rev" value="1.2083"/>
+        <joint name="jnt4_rev" value="0.008"/>
+        <joint name="jnt5_rev" value="-0.0537"/>
+        <joint name="jnt6_rev" value="-0.00559632"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->
     <end_effector name="Mallet" parent_link="gripper_fixed" group="manipulator"/>
