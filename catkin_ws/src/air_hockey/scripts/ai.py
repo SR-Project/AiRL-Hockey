@@ -46,20 +46,20 @@ def move(puck_x, puck_y, puck_dx, puck_dy, mallet_x, mallet_y, mallet_dx, mallet
         # print('{:15} {:4d} {:4d}'.format('not reachable', x, y))
 
     else:
-        #print("reachable")
+        print("reachable")
         if puck_vy <= 0:
-            #print("Puck still")
-            #print(puck_px, px)
-            #print(puck_py, py)
-            if puck_px < px: x = -1
-            if puck_px > px: x = 1
-            if puck_py > py: y = 1
-            if puck_py < py: y = -1
+            print("Puck still")
+            print(puck_px, px)
+            print(puck_py, py)
+            if puck_px < px: x = 1
+            if puck_px > px: x = -1
+            if puck_py > py: y = -1
+            if puck_py < py: y = 1
 #                print('{:15} {:4d} {:4d}'.format('stationary', x, y))
         else:
             too_fast = np.linalg.norm([puck_vx, puck_vy]) > 0.8*0.015
             if too_fast:
-                #print("Puck too fast")
+                print("Puck too fast")
                 def save_goal(goal, p):
                     diff = goal - p
                     if abs(diff) < 0.02: return  0
@@ -69,7 +69,7 @@ def move(puck_x, puck_y, puck_dx, puck_dy, mallet_x, mallet_y, mallet_dx, mallet
                 y = save_goal(goal_py, py)
 #                    print('{:15} {:4d} {:4d}'.format('too fast', x, y))
             else:
-                #print("Puck vel ok")
+                print("Puck vel ok")
                 if puck_px < px: x = -1
                 if puck_px > px: x = 1
                 if puck_py < py: y = -1

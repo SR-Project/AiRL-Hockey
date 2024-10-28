@@ -47,8 +47,7 @@ class VelocityControlNode:
         # Example RL model action in [-1, 1] for x and y forces
         rl_action = np.array(values)  # Replace with actual RL model output
 
-        #self.target_velocity = [-rl_action[0], rl_action[1]]
-        self.target_velocity = [-1,0]
+        self.target_velocity = [rl_action[0], rl_action[1]]
 
     def send_velocity_command(self):
         # Solve inverse kinematics for the given velocity to determine joint velocities
@@ -101,7 +100,7 @@ class VelocityControlNode:
         return joint_velocities
 
     def run(self):
-        rate = rospy.Rate(2)  # 10 Hz control loop
+        rate = rospy.Rate(10)  # 10 Hz control loop
         while not rospy.is_shutdown():
             self.send_velocity_command()
             rate.sleep()

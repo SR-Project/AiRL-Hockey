@@ -36,7 +36,7 @@ def main():
     # Publisher for the /rl_info topic
     rl_info_pub = rospy.Publisher('/rl_info', RlInfo, queue_size=10)
 
-    rate = rospy.Rate(2)  # 10 Hz
+    rate = rospy.Rate(10)  # 10 Hz
 
     while not rospy.is_shutdown():
         # Check if we have data from both topics
