@@ -22,13 +22,20 @@ class FixedTFBroadcaster:
             t1.header.stamp = current_time
             t1.child_frame_id = "base_link"
 
+            #   <arg name="arg_x" default="0.565" />
+            #    <arg name="arg_y" default="-0.214284" />
+            #    <arg name="arg_z" default="0.8" />
+            #    <arg name="arg_R" default="0.00" />
+            #    <arg name="arg_P" default="0.00" />
+            #    <arg name="arg_Y" default="1.570796" />
+
             # Define translation for the first TF
-            t1.transform.translation.x = -1.25
-            t1.transform.translation.y = 0.0
+            t1.transform.translation.x = 0.565
+            t1.transform.translation.y = -0.214284
             t1.transform.translation.z = 0.8
 
             # Define RPY and convert to quaternion for the first TF
-            roll1, pitch1, yaw1 = 0.0, 0.0, 0.0  # Replace with your roll, pitch, yaw values
+            roll1, pitch1, yaw1 = 0.0, 0.0, 1.570796  # Replace with your roll, pitch, yaw values
             quaternion1 = tf.transformations.quaternion_from_euler(roll1, pitch1, yaw1)
             t1.transform.rotation.x = quaternion1[0]
             t1.transform.rotation.y = quaternion1[1]
@@ -41,13 +48,20 @@ class FixedTFBroadcaster:
             t2.header.stamp = current_time
             t2.child_frame_id = "camera_link"
 
+             # <arg name="arg_x_cam" default="0.565" />
+            #<arg name="arg_y_cam" default="1.025" />
+            #<arg name="arg_z_cam" default="1.395" />
+            #<arg name="arg_R_cam" default="2e-06" />
+            #<arg name="arg_P_cam" default="1.54679" />
+            #<arg name="arg_Y_cam" default="1.57079" />
+
             # Define translation for the second TF
-            t2.transform.translation.x = 0.0
-            t2.transform.translation.y = 0.0
+            t2.transform.translation.x = 0.565
+            t2.transform.translation.y = 1.025
             t2.transform.translation.z = 1.395
 
             # Define RPY and convert to quaternion for the second TF
-            roll2, pitch2, yaw2 = 0.0, 1.5708, 3.1416  # Replace with your roll, pitch, yaw values
+            roll2, pitch2, yaw2 = -3.141546, 1.54679, 1.57079  # Replace with your roll, pitch, yaw values
             quaternion2 = tf.transformations.quaternion_from_euler(roll2, pitch2, yaw2)
             t2.transform.rotation.x = quaternion2[0]
             t2.transform.rotation.y = quaternion2[1]

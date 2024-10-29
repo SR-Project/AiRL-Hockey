@@ -43,10 +43,11 @@ def move_to_world_coords(world_coords):
     # Get and print the current joint values after reaching the target position
     joint_values = robot_arm.get_current_joint_values()
     print("Current joint values:", joint_values)
+ # [-0.0032323983538509182, 0.12831014685719744, 1.346392456075705, -0.014217674137413816, 0.061676363034622206, 0.011209224034026022]
     
 if __name__ == "__main__":
     # Example world coordinates (x, y, z)
-    world_x = -0.5  # LIMIT 0.6 with z=1.2 and y=0.0
+    world_x = -0.20  # LIMIT 0.6 with z=1.2 and y=0.0
     world_y = 0
     world_z = 0.775
 

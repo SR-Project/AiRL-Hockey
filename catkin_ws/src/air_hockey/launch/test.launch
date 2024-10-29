@@ -18,29 +18,29 @@
   <!-- Load the Robot -->
   <param name="robot_description" textfile="$(find air_hockey)/urdf/gofa_arm_urdf_toolfixed.urdf"/>
 
-  <arg name="arg_x" default="-1.25" />
-  <arg name="arg_y" default="0.00" />
+  <arg name="arg_x" default="0.565" />
+  <arg name="arg_y" default="-0.214284" />
   <arg name="arg_z" default="0.8" />
   <arg name="arg_R" default="0.00" />
   <arg name="arg_P" default="0.00" />
-  <arg name="arg_Y" default="0.00" />
+  <arg name="arg_Y" default="1.570796" />
 
 
   <!-- Load the Table -->
   <param name="table_desc" textfile="$(find air_hockey)/urdf/AHTable.urdf"/>
   
-  <arg name="arg_x_t" default="0.0" />
-  <arg name="arg_y_t" default="0.0" />
+  <arg name="arg_x_t" default="0.565" />
+  <arg name="arg_y_t" default="1.025" />
   <arg name="arg_z_t" default="0.0" />
-  <arg name="arg_R_t" default="1.570796 " />
-  <arg name="arg_P_t" default="0.00" />
-  <arg name="arg_Y_t" default="3.141588 " />
+  <arg name="arg_R_t" default="1.570796" />
+  <arg name="arg_P_t" default="0.000004" />
+  <arg name="arg_Y_t" default="1.570792" />
 
   <!-- Load the Puck -->
   <param name="puck_description" textfile="$(find air_hockey)/urdf/puck.urdf"/>
 
-  <arg name="arg_x_puck" default="-0.3" />
-  <arg name="arg_y_puck" default="0.2" />
+  <arg name="arg_x_puck" default="0.565" />
+  <arg name="arg_y_puck" default="1.025" />
   <arg name="arg_z_puck" default="0.9" /> <!-- Slightly above table surface -->
   <arg name="arg_R_puck" default="0.00" />
   <arg name="arg_P_puck" default="0.00" />
@@ -49,10 +49,10 @@
   <!-- Load the Camera -->
   <param name="cam_description" textfile="$(find air_hockey)/urdf/camera.urdf"/>
 
-  <arg name="arg_x_cam" default="0" />
-  <arg name="arg_y_cam" default="0" />
+  <arg name="arg_x_cam" default="0.565" />
+  <arg name="arg_y_cam" default="1.025" />
   <arg name="arg_z_cam" default="1.395" />
-  <arg name="arg_R_cam" default="2e-06" />
+  <arg name="arg_R_cam" default="-3.141546" />
   <arg name="arg_P_cam" default="1.54679" />
   <arg name="arg_Y_cam" default="1.57079" />
 
@@ -104,7 +104,7 @@
   </include>
 
   <!-- Show in Rviz -->   
-  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find air_hockey_moveit)/launch/moveit.rviz" />
+  <!--<node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find air_hockey_moveit)/launch/moveit.rviz" />-->
   
   
 </launch>

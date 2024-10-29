@@ -14,8 +14,8 @@ def move_to_world_coords(world_coords):
     # Initialize MoveIt commander
     robot_arm = MoveGroupCommander('manipulator')  # Adjust the group name according to your robot
 
-    robot_arm.set_named_target("Start")
-    robot_arm.go(wait=True)
+    #robot_arm.set_named_target("Start")
+    #robot_arm.go(wait=True)
 
     # Get the current pose of the robot (which includes orientation)
     current_pose = robot_arm.get_current_pose().pose
@@ -75,5 +75,5 @@ if __name__ == "__main__":
 
 
     # Example world coordinates (x, y, z)
-    world_coordinates = [-1, 0.3 ,0.8]
+    world_coordinates = [0.5, 0.3 ,0.8]
     move_to_world_coords(world_coordinates)

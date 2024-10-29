@@ -56,14 +56,16 @@ class PuckDetector(object):
 
             self.last_valid_position = world_coord
 
-            #model_name = "hockey_puck"
+            model_name = "hockey_puck"
 
-            #position, orientation = self.get_model_coordinates(model_name)
+            position, orientation = self.get_model_coordinates(model_name)
 
-            #if position and orientation:
-                #print(f"x={float(position.x)}, y={float(position.y)}, z={float(position.z)}")
-            #else:
-                #print(f"Failed to get the state of the model '{model_name}'")
+            '''if position and orientation:
+                print(f"x={float(position.x)}, y={float(position.y)}, z={float(position.z)}")
+            else:
+                print(f"Failed to get the state of the model '{model_name}'")'''
+
+            world_coord = (float(position.x), float(position.y), float(position.z))
 
 
             current_time = rospy.get_time()
@@ -75,7 +77,7 @@ class PuckDetector(object):
                 #print(f"Velocity (x,y): {velocity}")
             else:
                 velocity = (0,0)
-
+            #print(f"Velocity (x,y): {velocity}")
             # Publish the puck's state (position + velocity)
             self.publish_state(world_coord, velocity)
 
@@ -87,7 +89,7 @@ class PuckDetector(object):
 
                 if len(self.position_history) > 1:
                     velocity = self.compute_velocity_weighted()
-                    print(f"Velocity (x,y): {velocity}")
+                    #print(f"Velocity (x,y): {velocity}")
                 else:
                     velocity = (0,0)
 
@@ -226,6 +228,8 @@ class PuckDetector(object):
         x = (u - self.camera_matrix[0, 2]) * z / self.camera_matrix[0, 0]
         y = (v - self.camera_matrix[1, 2]) * z / self.camera_matrix[1, 1]
 
+        #print("From center:",x,y,z)
+
         x_cam = z
         y_cam = -x
         z_cam = y
@@ -252,7 +256,7 @@ class PuckDetector(object):
             # Transform the point
             point_base = tf2_geometry_msgs.do_transform_point(point_camera, trans)
             #return point_base.point.x, point_base.point.y, point_base.point.z
-            return point_base.point.y, point_base.point.x, point_base.point.z
+            return point_base.point.x, point_base.point.y, point_base.point.z
 
         except (tf2_ros.LookupException, tf2_ros.ConnectivityException, tf2_ros.ExtrapolationException):
             rospy.logerr('Could not find the transformation')
