@@ -1,0 +1,5 @@
+<launch>
+    <node pkg="air_hockey" type="teleop_wasd_keyboard.py" name="teleop_wasd_keyboard" output="screen">
+        <remap from="/cmd_vel" to="/robot_movement" />
+    </node>
+</launch>

@@ -29,6 +29,8 @@ def main():
         # Generate a new pair of values representing circular motion
         new_pair = generate_circle_pair(angle)
         
+        new_pair = [0, 0.5]
+        
         # Prepare the message
         msg = Float32MultiArray(data=new_pair)
         

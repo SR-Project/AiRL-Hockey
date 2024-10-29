@@ -104,7 +104,7 @@
   </include>
 
   <!-- Show in Rviz -->   
-  <!--<node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find air_hockey_moveit)/launch/moveit.rviz" />-->
+  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find air_hockey_moveit)/launch/moveit.rviz" />
   
   
 </launch>
