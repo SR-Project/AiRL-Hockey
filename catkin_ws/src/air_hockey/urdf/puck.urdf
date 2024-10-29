@@ -13,18 +13,6 @@
                 <!-- Use the same cylinder geometry for collision -->
                 <cylinder radius="0.025" length="0.010"/>
             </geometry>
-            <surface>
-                <friction>
-                    <ode>
-                        <mu>0.01</mu>   <!-- Low friction for sliding -->
-                        <mu2>0.01</mu2>
-                    </ode>
-                </friction>
-                <bounce>
-                    <restitution_coefficient>0.9</restitution_coefficient> <!-- High bounce for realistic collisions -->
-                    <threshold>0.01</threshold>
-                </bounce>
-            </surface>
         </collision>
         <inertial>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -35,6 +23,11 @@
 
     <gazebo reference="puck">
         <material>Gazebo/Blue</material>
+        <mu1 value="0.01"/>
+        <mu2 value="0.01"/>
+        <maxVel value="25.0"/>
+        <restitutionCoefficient value="0.99"/>
+        <bounceThreshold value="0.1"/>
     </gazebo>
     
 </robot>

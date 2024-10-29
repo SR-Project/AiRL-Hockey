@@ -23,8 +23,8 @@ group = moveit_commander.MoveGroupCommander("manipulator")  # Replace "manipulat
 
     
 # Move to start position
-group.set_named_target("Start")
-group.go(wait=True)
+#group.set_named_target("Start")
+#group.go(wait=True)
 
 # TF2 buffer and listener to transform between frames
 tf_buffer = tf2_ros.Buffer()

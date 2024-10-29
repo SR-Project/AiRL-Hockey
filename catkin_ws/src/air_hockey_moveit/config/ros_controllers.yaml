@@ -9,32 +9,32 @@ manipulator_controller:
     - jnt6_rev
   gains:
     jnt1_rev:
-      p: 100
-      d: 1
+      p: 1000
+      d: 0
       i: 1
       i_clamp: 1
     jnt2_rev:
-      p: 100
-      d: 1
+      p: 1000
+      d: 0
       i: 1
       i_clamp: 1
     jnt3_rev:
-      p: 100
-      d: 1
+      p: 1000
+      d: 0
       i: 1
       i_clamp: 1
     jnt4_rev:
-      p: 100
-      d: 1
+      p: 1000
+      d: 0
       i: 1
       i_clamp: 1
     jnt5_rev:
-      p: 100
-      d: 1
+      p: 1000
+      d: 0
       i: 1
       i_clamp: 1
     jnt6_rev:
-      p: 100
-      d: 1
+      p: 1000
+      d: 0
       i: 1
       i_clamp: 1

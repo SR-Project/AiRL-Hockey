@@ -13,18 +13,6 @@
             <geometry>
                 <mesh filename="package://air_hockey/SR24_02_ExeAHTable.obj" scale="1 1 1"/>
             </geometry>
-            <surface>
-                <friction>
-                    <ode>
-                        <mu>0.01</mu>
-                        <mu2>0.01</mu2>
-                    </ode>
-                </friction>
-                <bounce>
-                    <restitution_coefficient>0.9</restitution_coefficient>
-                    <threshold>0.01</threshold>
-                </bounce>
-            </surface>
         </collision>
         <inertial>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
@@ -35,6 +23,11 @@
 
 <gazebo>
     <static>true</static>
+    <mu1 value="0.01"/>
+    <mu2 value="0.01"/>
+    <maxVel value="25.0"/>
+    <restitutionCoefficient value="0.99"/>
+    <bounceThreshold value="0.1"/>
 </gazebo>
 
 

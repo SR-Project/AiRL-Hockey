@@ -52,12 +52,12 @@ def main():
             rl_info_pub.publish(rl_info_msg)
 
             # Log the data being published
-            rospy.loginfo("Publishing rl_info: puck_position(x=%f, y=%f, z=%f), puck_velocity(vx=%f, vy=%f, vz=%f), "
-                          "robot_position(x=%f, y=%f, z=%f), robot_velocity(vx=%f, vy=%f, vz=%f)",
-                          puck_position.x, puck_position.y, puck_position.z,
-                          puck_velocity.x, puck_velocity.y, puck_velocity.z,
-                          robot_position.x, robot_position.y, robot_position.z,
-                          robot_velocity.x, robot_velocity.y, robot_velocity.z)
+            #rospy.loginfo("Publishing rl_info: puck_position(x=%f, y=%f, z=%f), puck_velocity(vx=%f, vy=%f, vz=%f), "
+            #              "robot_position(x=%f, y=%f, z=%f), robot_velocity(vx=%f, vy=%f, vz=%f)",
+            #              puck_position.x, puck_position.y, puck_position.z,
+            #              puck_velocity.x, puck_velocity.y, puck_velocity.z,
+            #              robot_position.x, robot_position.y, robot_position.z,
+            #              robot_velocity.x, robot_velocity.y, robot_velocity.z)
 
         # Sleep to maintain the loop rate
         rate.sleep()
