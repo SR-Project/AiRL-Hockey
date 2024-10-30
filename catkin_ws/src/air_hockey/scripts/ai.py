@@ -1,6 +1,13 @@
 import numpy as np
 
 
+def act(goal, p, th):
+	diff = goal - p
+	if abs(diff) < 0.05: return  0
+	elif diff > 0:    return 1 
+	else:             return -1
+
+
 def move(puck_x, puck_y, puck_dx, puck_dy, mallet_x, mallet_y, mallet_dx, mallet_dy):
 	'''px, py = mallet_y, mallet_x
 	vx, vy = mallet_dy, mallet_dx
@@ -17,44 +24,28 @@ def move(puck_x, puck_y, puck_dx, puck_dy, mallet_x, mallet_y, mallet_dx, mallet
 	# Coordinate della proprio porta
 	goal_px, goal_py = 0.565, 0.050
 
-	reachable = puck_py <= 1.025 # half court
+	reachable = puck_py <= 0.95 # half court reachable
 
 	x, y = 0, 0
 	if not reachable:
-		target_px, target_py = (0.565, 0.150) # defense position above goal
+		target_px, target_py = (0.565, 0.100) # defense position above goal
 
-		def defend_goal(goal, p):
-			diff = goal - p
-			if abs(diff) < 0.05: return  0
-			elif diff > 0:    return -1 # negate since if the distance on y is > i need to go down
-			else:             return 1
-		x = defend_goal(target_px, px)
-		y = defend_goal(target_py, py)
+		x = act(target_px, px, 0.05)
+		y = act(target_py, py, 0.05)
 
 	else:
-		print("reachable")
 		if puck_vy <= 0:
-			if puck_px < px: x = 1
-			if puck_px > px: x = -1
-			if puck_py < py: y = 1
-			if puck_py > py: y = -1
-
+			x = act(puck_px, px, 0.01)
+			y = act(puck_py, py, 0.01)
+			
 		else:
 			too_fast = np.linalg.norm((puck_dx, puck_dy)) > 0.1 # TODO: check
 			if too_fast:
-				def save_goal(goal, p):
-					diff = goal - p
-					if abs(diff) < 0.01: return  0
-					elif diff > 0:    return  -1
-					else:             return 1
-				x = save_goal(goal_px, px)
-				y = save_goal(goal_py, py)
+				x = act(goal_px, px, 0.01)
+				y = act(goal_py, py, 0.01)
 
 			else:
-				if puck_px < px: x = 1
-				if puck_px > px: x = -1
-				if puck_py < py: y = 1 
-				if puck_py > py: y = -1
+				x = act(puck_px, px, 0.01)
+				y = act(puck_py, py, 0.01)
 
-	print(f"pre-conversion: {(x,y)}")
-	return x, y
+	return -x, -y # negate since the coordinates go in opposite directions w.r.t. image

@@ -31,6 +31,7 @@ class VelocityControlNode:
 
         # Initialize target velocities
         self.target_velocity = [0.0, 0.0]
+        # self.previous_velocity = [0.0, 0.0]
         self.last_command_time = time.time()  # Track last received command time
 
         # Threshold for minimal velocity command
@@ -67,7 +68,11 @@ class VelocityControlNode:
         self.last_command_time = time.time()  # Update the time of last received command
         self.target_velocity = [action_x, action_y]
 
-        print(f"post-conversion: {self.target_velocity}")
+        # # Smoothing factor
+        # alpha = 0.05
+        # self.target_velocity = alpha * np.array(self.target_velocity) + (1 - alpha) * np.array(self.previous_velocity)
+        # self.previous_velocity = self.target_velocity
+        # print(self.target_velocity)
 
     def send_velocity_command(self):
         # Check if idle for too long, reset velocities if necessary
@@ -78,6 +83,7 @@ class VelocityControlNode:
         # Only send command if velocity is above threshold
         if np.linalg.norm(self.target_velocity) < self.velocity_threshold:
             return
+
 
         # Solve inverse kinematics for the given velocity to determine joint velocities
         joint_trajectory_msg = JointTrajectory()
@@ -119,7 +125,7 @@ class VelocityControlNode:
         return joint_velocities
 
     def run(self):
-        rate = rospy.Rate(50)  # 10 Hz control loop
+        rate = rospy.Rate(100)  # 10 Hz control loop
         while not rospy.is_shutdown():
             self.send_velocity_command()
             rate.sleep()

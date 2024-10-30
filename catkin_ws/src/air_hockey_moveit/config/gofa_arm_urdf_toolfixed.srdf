@@ -24,9 +24,9 @@
     <group_state name="Start" group="manipulator">
         <joint name="jnt1_rev" value="0.00256572"/>
         <joint name="jnt2_rev" value="0.1609"/>
-        <joint name="jnt3_rev" value="1.3942"/>
+        <joint name="jnt3_rev" value="1.4685"/>
         <joint name="jnt4_rev" value="0.008"/>
-        <joint name="jnt5_rev" value="-0.0537"/>
+        <joint name="jnt5_rev" value="-0.0558"/>
         <joint name="jnt6_rev" value="-0.00559632"/>
     </group_state>
     <!--END EFFECTOR: Purpose: Represent information about an end effector.-->

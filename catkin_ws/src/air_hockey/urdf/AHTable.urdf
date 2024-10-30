@@ -21,14 +21,14 @@
         </inertial>
     </link>
 
-<gazebo>
-    <static>true</static>
-    <mu1 value="0.01"/>
-    <mu2 value="0.01"/>
-    <maxVel value="25.0"/>
-    <restitutionCoefficient value="0.99"/>
-    <bounceThreshold value="0.1"/>
-</gazebo>
+    <gazebo>
+        <static>true</static>
+        <mu1 value="0.0"/>
+        <mu2 value="0.0"/>
+        <maxVel value="25.0"/>
+        <restitutionCoefficient value="0.99"/>
+        <bounceThreshold value="0.1"/>
+    </gazebo>
 
 
 </robot>
