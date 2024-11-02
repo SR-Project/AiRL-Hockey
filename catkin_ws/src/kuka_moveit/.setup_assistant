@@ -8,4 +8,4 @@ moveit_setup_assistant_config:
   CONFIG:
     author_name: smart
     author_email: smart@unimore.it
-    generated_timestamp: 1730557708
+    generated_timestamp: 1730573663

@@ -51,9 +51,9 @@ if __name__ == "__main__":
     #world_y = 0
     #world_z = 0.775
 
-    base_x = 1.2
+    base_x = 0.5
     base_y = 0.0
-    base_z = 0.0
+    base_z = 0.032
 
     #world_coordinates = [world_x - base_x, world_y - base_y, world_z - base_z]
     world_coordinates = [base_x, base_y, base_z]
@@ -62,3 +62,5 @@ if __name__ == "__main__":
     #print("Relative Robot Position:", world_coordinates)
 
     move_to_world_coords(world_coordinates)
+
+#[0.010362684795768295, 0.5975724644094669, 0.0070118112299653035, -1.3962018912771796, -0.0184525969301097, 1.343069996158218, 0.0179723765203752, 0.01687028791367773, -0.23286732706769264]

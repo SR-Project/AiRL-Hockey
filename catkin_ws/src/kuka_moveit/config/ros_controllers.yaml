@@ -17,7 +17,7 @@ manipulator_controller:
       i: 1
       i_clamp: 1
     iiwa_joint_2:
-      p: 2000
+      p: 1500
       d: 0
       i: 1
       i_clamp: 1
