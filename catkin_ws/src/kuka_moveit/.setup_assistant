@@ -1,0 +1,11 @@
+moveit_setup_assistant_config:
+  URDF:
+    package: kuka
+    relative_path: urdf/new_kuka.urdf
+    xacro_args: ""
+  SRDF:
+    relative_path: config/kuka_iiwa14.srdf
+  CONFIG:
+    author_name: smart
+    author_email: smart@unimore.it
+    generated_timestamp: 1730557708

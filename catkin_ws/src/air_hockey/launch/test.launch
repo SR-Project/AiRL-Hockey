@@ -15,8 +15,19 @@
   </include>
 
 
-  <!-- Load the Robot -->
+  <!-- Load the GoFa Robot -->
+  <!--
   <param name="robot_description" textfile="$(find air_hockey)/urdf/gofa_arm_urdf_toolfixed.urdf"/>
+
+  <arg name="arg_x" default="0.565" />
+  <arg name="arg_y" default="-0.214284" />
+  <arg name="arg_z" default="0.8" />
+  <arg name="arg_R" default="0.00" />
+  <arg name="arg_P" default="0.00" />
+  <arg name="arg_Y" default="1.570796" />-->
+
+  <!-- Load the KUKA Robot -->
+  <param name="robot_description" textfile="$(find air_hockey)/urdf/new_kuka.urdf"/>
 
   <arg name="arg_x" default="0.565" />
   <arg name="arg_y" default="-0.214284" />
@@ -57,10 +68,16 @@
   <arg name="arg_Y_cam" default="1.57079" />
 
 
-  <!-- Spawn the Robot -->
+  <!-- Spawn the GoFa Robot -->
+  <!--
   <node name="spawn_urdf_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
     args="-x $(arg arg_x) -y $(arg arg_y) -z $(arg arg_z) -Y $(arg arg_Y) -R $(arg arg_R) -P $(arg arg_P) -param robot_description -urdf -model gofa_arm_urdf_toolfixed -J jnt1_rev 0.0
     -J jnt2_rev 0.0 -J jnt3_rev 0.0 -J jnt4_rev 0.0 -J jnt5_rev 0.0 -J jnt6_rev 0.0"
+  />-->
+
+  <!-- Spawn the KUKA -->
+  <node name="spawn_urdf_robot" pkg="gazebo_ros" type="spawn_model" output="screen"
+    args="-x $(arg arg_x) -y $(arg arg_y) -z $(arg arg_z) -Y $(arg arg_Y) -R $(arg arg_R) -P $(arg arg_P) -param robot_description -urdf -model new_kuka"
   />
 
   <!-- Spawn the Table -->
@@ -86,12 +103,16 @@
   <node pkg="air_hockey" type="publish_end_effector.py" name="end_effector_position" output="screen" />
   <node pkg="air_hockey" type="detect_puck.py" name="puck_position" output="screen" />
   <node pkg="air_hockey" type="pub_rl.py" name="rl_info" output="screen" />
+  <!--<node pkg="air_hockey" type="move_joint.py" name="air_hockey_sim" output="screen" />-->
 
 
 
   <!-- Load the controller parameters onto the parameter server -->
+  <!--
   <rosparam file="$(find air_hockey_moveit)/config/gazebo_controllers.yaml" />
-  <include file="$(find air_hockey_moveit)/launch/ros_controllers.launch"/>
+  <include file="$(find air_hockey_moveit)/launch/ros_controllers.launch"/>-->
+  <rosparam file="$(find kuka_moveit)/config/gazebo_controllers.yaml" />
+  <include file="$(find kuka_moveit)/launch/ros_controllers.launch"/>
 
   <!-- Spawn the Gazebo ROS controllers -->
   <node name="gazebo_controller_spawner" pkg="controller_manager" type="spawner" respawn="false" output="screen" args="joint_state_controller" />
@@ -99,12 +120,16 @@
   <!-- Given the published joint states, publish tf for the robot links -->
   <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" respawn="true" output="screen" />
   
+  <!--
   <include file="$(find air_hockey_moveit)/launch/move_group.launch" >
+     <arg name="publish_monitored_planning_scene" value="true" />
+  </include>-->
+  <include file="$(find kuka_moveit)/launch/move_group.launch" >
      <arg name="publish_monitored_planning_scene" value="true" />
   </include>
 
   <!-- Show in Rviz -->   
-  <node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find air_hockey_moveit)/launch/moveit.rviz" />
+  <!--<node name="rviz" pkg="rviz" type="rviz" required="true" args="-d $(find air_hockey_moveit)/launch/moveit.rviz" />-->
   
   
 </launch>

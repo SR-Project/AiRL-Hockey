@@ -1,0 +1,58 @@
+manipulator_controller:
+  type: velocity_controllers/JointTrajectoryController
+  joints:
+    - iiwa_joint_1
+    - iiwa_joint_2
+    - iiwa_joint_4
+    - iiwa_joint_3
+    - iiwa_joint_5
+    - iiwa_joint_6
+    - iiwa_joint_7
+    - ball_joint_x
+    - ball_joint_y
+  gains:
+    iiwa_joint_1:
+      p: 1500
+      d: 0
+      i: 1
+      i_clamp: 1
+    iiwa_joint_2:
+      p: 2000
+      d: 0
+      i: 1
+      i_clamp: 1
+    iiwa_joint_4:
+      p: 1000
+      d: 0
+      i: 1
+      i_clamp: 1
+    iiwa_joint_3:
+      p: 1000
+      d: 0
+      i: 1
+      i_clamp: 1
+    iiwa_joint_5:
+      p: 1000
+      d: 0
+      i: 1
+      i_clamp: 1
+    iiwa_joint_6:
+      p: 1000
+      d: 0
+      i: 1
+      i_clamp: 1
+    iiwa_joint_7:
+      p: 1500
+      d: 0
+      i: 1
+      i_clamp: 1
+    ball_joint_x:
+      p: 1000
+      d: 0
+      i: 1
+      i_clamp: 1
+    ball_joint_y:
+      p: 1000
+      d: 0
+      i: 1
+      i_clamp: 1

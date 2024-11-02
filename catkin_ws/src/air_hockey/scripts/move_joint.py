@@ -12,7 +12,7 @@ from ai import move
 import time
 
 
-VELOCITY_FACTOR = 0.5
+VELOCITY_FACTOR = 1.25
 
 
 class VelocityControlNode:
@@ -131,5 +131,16 @@ class VelocityControlNode:
             rate.sleep()
 
 if __name__ == '__main__':
+
+    rospy.sleep(5)
+
+    robot_arm = MoveGroupCommander('manipulator')
+
+    robot_arm.set_named_target("Start")
+    robot_arm.go(wait=True)
+
+    #rospy.sleep(1)    
+
+
     controller = VelocityControlNode()
     controller.run()

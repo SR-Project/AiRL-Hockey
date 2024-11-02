@@ -1,0 +1,15 @@
+controller_list:
+  - name: manipulator_controller
+    action_ns: follow_joint_trajectory
+    type: FollowJointTrajectory
+    default: True
+    joints:
+      - iiwa_joint_1
+      - iiwa_joint_2
+      - iiwa_joint_4
+      - iiwa_joint_3
+      - iiwa_joint_5
+      - iiwa_joint_6
+      - iiwa_joint_7
+      - ball_joint_x
+      - ball_joint_y
