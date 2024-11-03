@@ -198,7 +198,7 @@ class PuckDetector(object):
         contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
         # draw contours
-        contour_image = cv2.drawContours(frame, contours, -1, (0, 255, 0), 3)
+        #contour_image = cv2.drawContours(frame, contours, -1, (0, 255, 0), 3)
 
         #cv2.imshow('contour', contour_image)
 

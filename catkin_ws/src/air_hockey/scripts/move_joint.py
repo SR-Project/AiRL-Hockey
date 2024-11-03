@@ -132,7 +132,7 @@ class VelocityControlNode:
 
 if __name__ == '__main__':
 
-    rospy.sleep(5)
+    #rospy.sleep(5)
 
     robot_arm = MoveGroupCommander('manipulator')
 

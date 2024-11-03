@@ -4,14 +4,14 @@
         <visual>
             <geometry>
                 <!-- Define the puck as a cylinder -->
-                <cylinder radius="0.025" length="0.020"/>
+                <cylinder radius="0.025" length="0.010"/>
             </geometry>
             <origin xyz="0.0 0.0 0.0" rpy="0.0 0.0 0.0"/>
         </visual>
         <collision>
             <geometry>
                 <!-- Use the same cylinder geometry for collision -->
-                <cylinder radius="0.025" length="0.020"/>
+                <cylinder radius="0.025" length="0.010"/>
             </geometry>
         </collision>
         <inertial>
