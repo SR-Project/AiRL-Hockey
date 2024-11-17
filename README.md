@@ -18,8 +18,8 @@ sudo apt install python3 python3-pip
 ## Installation
 Clone the repository, install Python dependencies, and set up the catkin environment:
 ```
-git clone https://github.com/SR-Project/AH.git
-cd ./AH
+git clone https://github.com/SR-Project/AiRL-Hockey.git
+cd ./AiRL-Hockey
 pip3 install -r requirements.txt
 cd ./catkin_ws
 catkin_make
