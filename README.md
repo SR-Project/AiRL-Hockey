@@ -33,7 +33,7 @@ roslaunch air_hockey demo.launch
 ```
 Press the `Play` button in Gazebo.
 
-2. Open a second terminal in the `catkin_ws folder` to start the Reinforcement Learning script controlling the robot:
+2. Open a second terminal in the `catkin_ws` folder to start the Reinforcement Learning script controlling the robot:
 ```
 source build/setup.bash
 rosrun air_hockey move_joint.py
