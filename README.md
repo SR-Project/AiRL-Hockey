@@ -4,7 +4,8 @@ Implementation of a robotic arm playing Air Hockey autonomously using Reinforcem
 This project was developed as part of the Smart Robotics course at UniMore, utilizing `ROS Noetic`, `Gazebo` for simulation, and `MoveIt` for motion planning.
 
 ## Pre-requisites
-This project has been built and tested on an `Ubuntu 20.04 Focal Fossa` virtual machine. It has not been verified on newer versions of Ubuntu or ROS.
+> [!NOTE]
+> This project has been built and tested on an `Ubuntu 20.04 Focal Fossa` virtual machine. It has not been verified on newer versions of Ubuntu or ROS.
 
 To install the required dependencies, run the following commands:
 ```
