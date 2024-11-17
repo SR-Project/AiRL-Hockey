@@ -292,16 +292,10 @@
         <visual>
             <origin rpy="0 0 0" xyz="0 0 0" />
             <geometry>
-                <cylinder length="0.4" radius="0.015" />
+                <cylinder length="0.4" radius="0.01" />
             </geometry>
             <material name="Grey" />
         </visual>
-        <collision>
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <geometry>
-                <cylinder length="0.4" radius="0.015" />
-            </geometry>
-        </collision>
     </link>
     <!-- Ball x -->
     <!-- Revolute joint on X-axis -->
@@ -327,12 +321,6 @@
             </geometry>
             <material name="Green" />
         </visual>
-        <collision>
-            <origin rpy="0 0 0" xyz="0 0 0" />
-            <geometry>
-                <sphere radius="0.03" />
-            </geometry>
-        </collision>
     </link>
     <!-- Ball y-->
     <!-- Revolute joint on Y-axis -->
@@ -354,34 +342,29 @@
     <joint name="fixed_mallet_joint" type="fixed">
         <parent link="ball_link_2" />
         <child link="mallet" />
-        <origin rpy="0 0 0.03" xyz="0 0 0" />
+        <origin rpy="0 0 0" xyz="0 0 0.05" />
     </joint>
     <!-- Link for the mallet -->
     <link name="mallet">
         <inertial>
-            <origin rpy="0 0 0" xyz="0 0 0.03" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
             <mass value="0.2" />
             <inertia ixx="0.005" ixy="0" ixz="0" iyy="0.005" iyz="0" izz="0.005" />
         </inertial>
         <visual>
-            <origin rpy="0 0 0" xyz="0 0 0.03" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.05" radius="0.05" />
             </geometry>
             <material name="Blue" />
         </visual>
         <collision>
-            <origin rpy="0 0 0" xyz="0 0 0.03" />
+            <origin rpy="0 0 0" xyz="0 0 0" />
             <geometry>
                 <cylinder length="0.05" radius="0.05" />
             </geometry>
         </collision>
     </link>
-    <gazebo>
-        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
-            <robotNamespace>/</robotNamespace>
-        </plugin>
-    </gazebo>
     <transmission name="trans_iiwa_joint_1">
         <type>transmission_interface/SimpleTransmission</type>
         <joint name="iiwa_joint_1">
@@ -472,5 +455,10 @@
             <mechanicalReduction>1</mechanicalReduction>
         </actuator>
     </transmission>
+    <gazebo>
+        <plugin name="gazebo_ros_control" filename="libgazebo_ros_control.so">
+            <robotNamespace>/</robotNamespace>
+        </plugin>
+    </gazebo>
 </robot>
 

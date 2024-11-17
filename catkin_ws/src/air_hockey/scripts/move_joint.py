@@ -125,22 +125,17 @@ class VelocityControlNode:
         return joint_velocities
 
     def run(self):
-        rate = rospy.Rate(100)  # 10 Hz control loop
+        rate = rospy.Rate(100)
         while not rospy.is_shutdown():
             self.send_velocity_command()
             rate.sleep()
 
 if __name__ == '__main__':
 
-    #rospy.sleep(5)
-
     robot_arm = MoveGroupCommander('manipulator')
 
     robot_arm.set_named_target("Start")
     robot_arm.go(wait=True)
-
-    #rospy.sleep(1)    
-
 
     controller = VelocityControlNode()
     controller.run()

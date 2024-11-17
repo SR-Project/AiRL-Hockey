@@ -28,7 +28,8 @@ def move(puck_x, puck_y, puck_dx, puck_dy, mallet_x, mallet_y, mallet_dx, mallet
 
 	x, y = 0, 0
 	if not reachable:
-		target_px, target_py = (0.565, 0.100) # defense position above goal
+		#target_px, target_py = (0.565, 0.100) # defense position above goal
+		target_px, target_py = (0.565, 0.200)
 
 		x = act(target_px, px, 0.05)
 		y = act(target_py, py, 0.05)

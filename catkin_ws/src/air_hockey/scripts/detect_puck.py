@@ -38,34 +38,21 @@ class PuckDetector(object):
     def camera_callback(self, data):
         try:
             cv_image = self.bridge.imgmsg_to_cv2(data, desired_encoding="bgr8")
-            #cv2.imshow('frame from camera', cv_image)
         except CvBridgeError as e:
             print(e)
 
         puck_center = self.detect_puck(cv_image)
-        #print(puck_center)
 
         if puck_center is not None:
             # Convert 2D pixel to 3D coordinates
             puck_3d = self.pixel_to_3d(puck_center)
-            #print(puck_3d)
-
             world_coord = self.transform_point(puck_3d)
-            #print(f"Coords (x,y,z): {world_coord}")
-            #print("Real coords: (0.000026, -0.000011, 0.774995)")
-
             self.last_valid_position = world_coord
 
-            model_name = "hockey_puck"
-
-            position, orientation = self.get_model_coordinates(model_name)
-
-            '''if position and orientation:
-                print(f"x={float(position.x)}, y={float(position.y)}, z={float(position.z)}")
-            else:
-                print(f"Failed to get the state of the model '{model_name}'")'''
-
-            world_coord = (float(position.x), float(position.y), float(position.z))
+            # Simulation coords to test the model and when there are problem with the camera tf
+            #model_name = "hockey_puck"
+            #position, orientation = self.get_model_coordinates(model_name)
+            #world_coord = (float(position.x), float(position.y), float(position.z))
 
 
             current_time = rospy.get_time()
@@ -74,11 +61,8 @@ class PuckDetector(object):
 
             if len(self.position_history) > 1:
                 velocity = self.compute_velocity_weighted()
-                #print(f"Velocity (x,y): {velocity}")
             else:
                 velocity = (0,0)
-            #print(f"Velocity (x,y): {velocity}")
-            # Publish the puck's state (position + velocity)
             self.publish_state(world_coord, velocity)
 
         else:
@@ -89,7 +73,6 @@ class PuckDetector(object):
 
                 if len(self.position_history) > 1:
                     velocity = self.compute_velocity_weighted()
-                    #print(f"Velocity (x,y): {velocity}")
                 else:
                     velocity = (0,0)
 
@@ -161,14 +144,11 @@ class PuckDetector(object):
         return (vx_avg, vy_avg)
 
     def get_model_coordinates(self, model_name):
-        # Wait until the service /gazebo/get_model_state is available
         rospy.wait_for_service('/gazebo/get_model_state')
         try:
-            # Create a service proxy for /gazebo/get_model_state
             get_model_state = rospy.ServiceProxy('/gazebo/get_model_state', GetModelState)
             
-            # Call the service and pass the model name to get the model state
-            model_state = get_model_state(model_name, "world")  # 'world' is the reference frame
+            model_state = get_model_state(model_name, "world")
             
             if model_state.success:
                 position = model_state.pose.position
@@ -197,16 +177,11 @@ class PuckDetector(object):
         # Find contours of the thresholded image
         contours, _ = cv2.findContours(mask, cv2.RETR_TREE, cv2.CHAIN_APPROX_SIMPLE)
 
-        # draw contours
-        #contour_image = cv2.drawContours(frame, contours, -1, (0, 255, 0), 3)
-
-        #cv2.imshow('contour', contour_image)
 
         if contours:
             # Find the largest contour (assuming it's the puck)
             largest_contour = max(contours, key=cv2.contourArea)
 
-            # Get the center of the puck from the contour
             M = cv2.moments(largest_contour)
             if M["m00"] > 0:
                 cX = int(M["m10"] / M["m00"])
@@ -220,16 +195,14 @@ class PuckDetector(object):
         if self.camera_matrix is None:
             rospy.logwarn("No camera matrix found.")
             return None
-        
-        # with our camera x = z, y = -x, z = y
+    
         
         u, v = puck_center
         z = (1.395 - 0.775)
         x = (u - self.camera_matrix[0, 2]) * z / self.camera_matrix[0, 0]
         y = (v - self.camera_matrix[1, 2]) * z / self.camera_matrix[1, 1]
 
-        #print("From center:",x,y,z)
-
+        # with our camera x = z, y = -x, z = y
         x_cam = z
         y_cam = -x
         z_cam = y

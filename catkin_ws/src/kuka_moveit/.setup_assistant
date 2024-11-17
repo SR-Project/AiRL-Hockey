@@ -1,6 +1,6 @@
 moveit_setup_assistant_config:
   URDF:
-    package: kuka
+    package: air_hockey
     relative_path: urdf/new_kuka.urdf
     xacro_args: ""
   SRDF:
@@ -8,4 +8,4 @@ moveit_setup_assistant_config:
   CONFIG:
     author_name: smart
     author_email: smart@unimore.it
-    generated_timestamp: 1730573663
+    generated_timestamp: 1730733626
