@@ -1,0 +1,14 @@
+gym==0.17.2
+gymnasium==0.29.1
+h5py==3.12.1
+keras==3.6.0
+matplotlib==3.9.2
+numpy==1.26.4
+pandas==2.2.2
+pygame==2.6.0
+PyYAML==6.0.2
+scipy==1.14.1
+tensorboard==2.17.1
+tensorflow==2.17.0
+torch==2.5.1
+tqdm==4.66.6
