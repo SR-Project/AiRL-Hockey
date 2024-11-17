@@ -8,6 +8,7 @@ from trajectory_msgs.msg import JointTrajectory, JointTrajectoryPoint
 from moveit_commander import RobotCommander, MoveGroupCommander
 from numpy.linalg import pinv  # Pseudo-inverse
 from air_hockey.msg import RlInfo
+# from rl import move
 from ai import move
 import time
 
@@ -35,7 +36,7 @@ class VelocityControlNode:
         self.last_command_time = time.time()  # Track last received command time
 
         # Threshold for minimal velocity command
-        self.velocity_threshold = 1e-3  # Adjust as needed
+        self.velocity_threshold = 1e-3 
 
     def velocity_callback(self, data):
         

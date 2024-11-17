@@ -1,2 +1,8 @@
+# ROS files
 /catkin_ws/build/*
 /catkin_ws/devel/*
+
+# Python files
+*.pyc
+*.pkl
+*.pth

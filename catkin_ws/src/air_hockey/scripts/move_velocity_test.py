@@ -27,7 +27,7 @@ class VelocityControlNode:
         self.last_command_time = time.time()  # Track last received command time
 
         # Threshold for minimal velocity command
-        self.velocity_threshold = 1e-3  # Adjust as needed
+        self.velocity_threshold = 1e-3
 
     def velocity_callback(self, data):
         values = data.data
