@@ -1,26 +1,39 @@
 # AiRL-Hockey
-Implementation of a robotic arm playing Air Hockey autonomously thanks to Reinforcement Learning.
+Implementation of a robotic arm playing Air Hockey autonomously using Reinforcement Learning.
 
-Built as a group project for the Smart Robotics course @ UniMore.
+This project was developed as part of the Smart Robotics course at UniMore, utilizing `ROS Noetic`, `Gazebo` for simulation, and `MoveIt` for motion planning.
 
-# Technologies
-tabella come su slides
+## Pre-requisites
+This project has been built and tested on an `Ubuntu 20.04 Focal Fossa` virtual machine. It has not been verified on newer versions of Ubuntu or ROS.
 
-# Pre-requisites
-This project was built and run on a Ubuntu 20.04 Focal Fossa virtual machine.
+To install the required dependencies, run the following commands:
+```
+wget -c https://raw.githubusercontent.com/qboticslabs/ros_install_noetic/master/ros_install_noetic.sh
+chmod +x ./ros_install_noetic.sh
+./ros_install_noetic.sh
+sudo apt install python3 python3-pip
+```
 
-Run the following commands to install all required dependencies:
-...
-
-The project has not been tested on newer versions of Ubuntu nor ROS.
-
-# Installation
-Run the followind commands to download and build the project:
-git clone ...
-cd AH/catkin_ws
+## Installation
+Clone the repository, install Python dependencies, and set up the catkin environment:
+```
+git clone https://github.com/SR-Project/AH.git
+cd ./AH
+pip3 install -r requirements.txt
+cd ./catkin_ws
 catkin_make
+```
 
-# Usage
-Open a terminal inside the catkin_ws folder and run the following to start the Gazebo simulation:
+## Usage
+1. Open a terminal in the `catkin_ws` folder and start the Gazebo simulation:
+```
 source build/setup.bash
-roslaunch ...
+roslaunch air_hockey demo.launch
+```
+Press the `Play` button in Gazebo.
+
+2. Open a second terminal in the `catkin_ws folder` to start the Reinforcement Learning script controlling the robot:
+```
+source build/setup.bash
+rosrun air_hockey move_joint.py
+```
